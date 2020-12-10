@@ -1,0 +1,211 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="RespondToDruid" this:RespondToDruid.in_SendToDruid="[New Dictionary(Of String, Object)]" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:da="clr-namespace:Druid.Activities;assembly=Druid.Activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_DataFromDruid" Type="InArgument(njl:JObject)" />
+    <x:Property Name="in_SendToDruid" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_CustomResponseEntityTypeName" Type="InArgument(x:String)" />
+    <x:Property Name="in_DruidConfig" Type="InArgument(njl:JObject)" />
+    <x:Property Name="in_ResponseCode" Type="InArgument(x:String)" />
+    <x:Property Name="in_ResponseMessage" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1094,2295</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>RespondToDruid_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="48">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="40">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="자동화 프로세스 결과를 Druid로 전달 &#xD;&#xA;&#xD;&#xA;양방향 및 비동기 동작의 핵심 " DisplayName="RespondToDruid" sap:VirtualizedContainerService.HintSize="526,2130" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Default="[New Dictionary(Of String, Object)]" Name="DruidDataCallback" />
+      <Variable x:TypeArguments="x:String" Name="DruidDataAsString" />
+      <Variable x:TypeArguments="njl:JObject" Name="Response" />
+      <Variable x:TypeArguments="njl:JObject" Name="DruidConfig" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="484,93" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Setting up info to send back to Druid&quot;]" />
+    <Assign sap2010:Annotation.AnnotationText="Druid에서 사용할 EntityTypeName을 설정해 줌 (반드시 필요)" DisplayName="Assign config entity type name" sap:VirtualizedContainerService.HintSize="484,104" sap2010:WorkflowViewState.IdRef="Assign_6">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Object">[DruidDataCallback("$entityTypeName$")]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Object">[in_DataFromDruid("UiPath_ResponseEntityName").ToString]</InArgument>
+      </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </Assign>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="484,299" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,221" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:MultipleAssign DisplayName="Set Status Code &amp; Error Message" sap:VirtualizedContainerService.HintSize="334,129" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+            <ui:MultipleAssign.AssignOperations>
+              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:Object">[DruidDataCallback("ResponseCode")]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:Object">[in_ResponseCode]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+                  <ui:AssignOperation.To>
+                    <OutArgument x:TypeArguments="x:Object">[DruidDataCallback("ResponseMessage")]</OutArgument>
+                  </ui:AssignOperation.To>
+                  <ui:AssignOperation.Value>
+                    <InArgument x:TypeArguments="x:Object">[in_ResponseMessage]</InArgument>
+                  </ui:AssignOperation.Value>
+                </ui:AssignOperation>
+              </scg:List>
+            </ui:MultipleAssign.AssignOperations>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:MultipleAssign>
+        </Sequence>
+      </ui:CommentOut.Body>
+    </ui:CommentOut>
+    <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:String, x:Object)" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="응답 Entity 항목에 맞게 값을 추가 해줌 " DisplayName="For Each" sap:VirtualizedContainerService.HintSize="484,226" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[in_SendToDruid]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="scg:KeyValuePair(x:String, x:Object)">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="scg:KeyValuePair(x:String, x:Object)" Name="kvPair" />
+          </ActivityAction.Argument>
+          <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Object">[DruidDataCallback(kvPair.Key)]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Object">[kvPair.Value]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </ActivityAction>
+      </ui:ForEach.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:ForEach>
+    <Assign sap2010:Annotation.AnnotationText="JSON형태로 변환 " DisplayName="Assign Serialize DruidData" sap:VirtualizedContainerService.HintSize="484,91" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[DruidDataAsString]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[JsonConvert.SerializeObject(DruidDataCallback)]</InArgument>
+      </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </Assign>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="484,93" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Sending to druid: &quot; + Environment.NewLine + DruidDataAsString]" />
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="484,263" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,185" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,93" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;System Info for Druid: &quot;+ Environment.NewLine+ &#xA;&quot;ExecutionId: &quot;+ in_DataFromDruid(&quot;ExecutionId&quot;).ToString + Environment.NewLine +&#xA;&quot;ResponseFlowId: &quot; + in_DataFromDruid(&quot;ResponseFlowId&quot;).ToString +  Environment.NewLine +&#xA;&quot;ResponseUserId: &quot; + in_DataFromDruid(&quot;ResponseUserId&quot;).ToString +  Environment.NewLine +&#xA;&quot;Password: &quot; + in_DruidConfig(&quot;Password&quot;).ToString +  Environment.NewLine +&#xA;&quot;Tenant: &quot; + in_DruidConfig(&quot;Tenant&quot;).ToString +  Environment.NewLine +&#xA;&quot;UsernameOrEmailAddress: &quot; + in_DruidConfig(&quot;UsernameOrEmailAddress&quot;).ToString +  Environment.NewLine +&#xA;&quot;DruidAuthenticateResource: &quot; + in_DruidConfig(&quot;DruidAuthenticateResource&quot;).ToString +  Environment.NewLine +&#xA;&quot;DruidBaseServicesURL: &quot; + in_DruidConfig(&quot;DruidBaseServicesURL&quot;).ToString +  Environment.NewLine +&#xA;&quot;DruidStartFlowResource: &quot; + in_DruidConfig(&quot;DruidStartFlowResource&quot;).ToString +  Environment.NewLine]" />
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <da:TriggerConversation sap2010:Annotation.AnnotationText="Druid 에게 응답 메세지를 전달 함 &#xD;&#xA;&#xD;&#xA;필요한 항목들이 많이 있어 전부 채워서 보내줘야 하며, 최초 Queue에 항목을 추가할때 필요한 항목을 다 넣어줘야 함 " AuthenticateResource="[in_DruidConfig(&quot;DruidAuthenticateResource&quot;).ToString]" BaseServicesUrl="[in_DruidConfig(&quot;DruidBaseServicesURL&quot;).ToString]" DisplayName="Trigger conversation" DruidData="[DruidDataAsString]" ExecutionId="[in_DataFromDruid(&quot;ExecutionId&quot;).ToString]" FlowId="[in_DataFromDruid(&quot;ResponseFlowId&quot;).ToString]" sap:VirtualizedContainerService.HintSize="484,146" sap2010:WorkflowViewState.IdRef="TriggerConversation_1" Password="[in_DruidConfig(&quot;Password&quot;).ToString]" Response="[Response]" StartFlowResource="[in_DruidConfig(&quot;DruidStartFlowResource&quot;).ToString]" TargetUserMasterId="[in_DataFromDruid(&quot;ResponseUserId&quot;).ToString]" Tenant="[in_DruidConfig(&quot;Tenant&quot;).ToString]" UserNameOrEmailAddress="[in_DruidConfig(&quot;UsernameOrEmailAddress&quot;).ToString]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </da:TriggerConversation>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="484,93" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Response from Druid: &quot; + Environment.NewLine + JsonConvert.SerializeObject(Response)]" />
+    <If Condition="[Response.ToString.Contains(&quot;Your request is not valid&quot;)]" DisplayName="If Druid sent back error response" sap:VirtualizedContainerService.HintSize="484,210" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Throw Exception="[New Exception(&quot;Druid sent back that response is invalid&quot; + Environment.NewLine + Response.ToString)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_1" />
+      </If.Then>
+    </If>
+  </Sequence>
+</Activity>

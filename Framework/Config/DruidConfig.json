@@ -1,0 +1,10 @@
+{
+    "DruidAuthenticateResource": "/api/services/app/WebAPIService/ExternalAuthenticate",
+    "DruidStartFlowResource": "/api/services/app/Flow/StartFlow",
+   
+
+    "DruidBaseServicesURL": "https://koreascoring.community.druidplatform.com/",
+    "Tenant": "koreascoring",
+    "UsernameOrEmailAddress":"hyungsoo.kim",
+    "Password":"ks1234Qwer!Q"
+}
