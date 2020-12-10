@@ -1,5 +1,5 @@
 {
-  "name": "DruidSimpleFrameworkUnattended1Template",
+  "name": "DruidUnattededTemplate",
   "description": "언어텐디드 로봇과 Druid 챗봇 연동 템플릿 ",
   "main": "Main.xaml",
   "dependencies": {
@@ -42,6 +42,14 @@
     "modernBehavior": false
   },
   "expressionLanguage": "VisualBasic",
+  "entryPoints": [
+    {
+      "filePath": "Main.xaml",
+      "uniqueId": "e70803be-a83a-4c78-b224-db7cdeb891d3",
+      "input": [],
+      "output": []
+    }
+  ],
   "isTemplate": true,
   "templateProjectData": {},
   "publishData": {}
